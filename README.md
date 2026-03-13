@@ -63,20 +63,14 @@ conda activate tanha
 
 
 Install required packages:
-
-
-pip install torch transformers datasets trl sentence-transformers spacy scikit-learn wandb
+pip install torch transformers datasets trl sentence-transformers spacy scikit-learn wandb unsloth unsloth_zoo
 
 
 Download SpaCy model:
-
-
 python -m spacy download en_core_web_trf
 
 
 (Optional) If you have the **legal NER model**:
-
-
 python -m spacy download en_legal_ner_trf
 
 
@@ -87,23 +81,14 @@ python -m spacy download en_legal_ner_trf
 Input dataset must contain **NER-tagged judgments and summaries**.
 
 Example:
-
-
 {
 "NER_Judgment": "The <COURT>Delhi High Court</COURT> considered <PROVISION>Section 420 IPC</PROVISION>...",
 "NER_Summary": "The <COURT>Delhi High Court</COURT> ruled under <PROVISION>Section 420 IPC</PROVISION>..."
 }
 
-
 Entities must follow the format:
-
-
 <TYPE>entity text</TYPE>
-
-
 Supported entity types:
-
-
 COURT
 JUDGE
 STATUTE
@@ -114,6 +99,12 @@ RESPONDENT
 
 
 ---
+
+To reproduce the full pipeline:
+
+bash run_pipeline.sh
+
+
 
 # Step 1 — Preprocess Dataset
 
