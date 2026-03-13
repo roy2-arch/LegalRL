@@ -314,7 +314,7 @@ def compute_entity_reward(text, cache):
 
     halluc_rate = weighted_fp/(weighted_pred+1e-8)
 
-    reward = 5*weighted_recall - 4*halluc_rate
+    reward = alpha*weighted_recall - beta*halluc_rate
 
     return reward
 
