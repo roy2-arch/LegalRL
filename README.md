@@ -31,27 +31,6 @@ The reward function encourages:
 - Low **hallucinated entities**
 - Balanced **entity precision**
 
----
-
-# Repository Structure
-LegalRL/
-│
-├── train_rl.py
-├── preprocess_dataset.py
-├── legal_structural_utils.py
-├── debug_structural.py
-│
-├── data/
-│ ├── train.json
-│ └── val.json
-│
-├── cache/
-│ ├── train_entity_cache.pkl
-│ ├── val_entity_cache.pkl
-│ └── entity_type_weights.pkl
-│
-└── README.md
-
 
 ---
 
