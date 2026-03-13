@@ -2,28 +2,25 @@
 
 # ============================================
 # TANHA Pipeline Runner
-# Entity-Grounded RL for Legal Summarization
+# Entity-guided RL for Legal Summarization
 # ============================================
 
 set -e
 
 echo "=========================================="
-echo "TANHA: Legal Summarization RL Pipeline"
+echo "Entity-guided RL Pipeline"
 echo "=========================================="
 
 # -------------------------------------------------
-# 1. Create environment (optional)
+# 1. Environment setup
 # -------------------------------------------------
 
-if ! command -v conda &> /dev/null
-then
-    echo "Conda not found. Skipping environment creation."
-else
-    echo "Creating conda environment..."
+echo "Checking Python environment..."
 
-    conda create -y -n tanha python=3.10 || true
-    source "$(conda info --base)/etc/profile.d/conda.sh"
-    conda activate tanha
+if ! command -v python &> /dev/null
+then
+    echo "Python not found. Please install Python >=3.10"
+    exit
 fi
 
 
@@ -56,7 +53,7 @@ python -m spacy download en_core_web_trf || true
 
 
 # -------------------------------------------------
-# 4. Create folders
+# 4. Prepare folders
 # -------------------------------------------------
 
 mkdir -p data
@@ -65,7 +62,60 @@ mkdir -p outputs
 
 
 # -------------------------------------------------
-# 5. Preprocess dataset
+# 5. Dataset Instructions
+# -------------------------------------------------
+
+echo "=========================================="
+echo "DATASET SETUP"
+echo "=========================================="
+
+echo ""
+echo "IL-TUR dataset will be downloaded automatically."
+echo ""
+
+echo "MILDSum dataset cannot be redistributed."
+echo "Please request access from the authors:"
+echo ""
+echo "  https://github.com/Exploration-Lab/MILDSum"
+echo ""
+echo "After obtaining the dataset, place files in:"
+echo ""
+echo "  data/train.json"
+echo "  data/val.json"
+echo ""
+
+
+# -------------------------------------------------
+# 6. Download IL-TUR dataset
+# -------------------------------------------------
+
+echo "Downloading IL-TUR dataset from HuggingFace..."
+
+python <<EOF
+from datasets import load_dataset
+import json
+import os
+
+dataset = load_dataset("Exploration-Lab/IL-TUR")
+
+os.makedirs("data", exist_ok=True)
+
+with open("data/iltur_train.json","w") as f:
+    for row in dataset["train"]:
+        json.dump(row,f)
+        f.write("\n")
+
+with open("data/iltur_test.json","w") as f:
+    for row in dataset["test"]:
+        json.dump(row,f)
+        f.write("\n")
+
+print("IL-TUR dataset downloaded.")
+EOF
+
+
+# -------------------------------------------------
+# 7. Preprocess dataset
 # -------------------------------------------------
 
 echo "Running preprocessing..."
@@ -74,18 +124,18 @@ python preprocess_dataset.py
 
 
 # -------------------------------------------------
-# 6. Start RL training
+# 8. Start RL training
 # -------------------------------------------------
 
-echo "Starting reinforcement learning training..."
+echo "Starting RL training..."
 
 python train_rl.py
 
 
 # -------------------------------------------------
-# 7. Finished
+# 9. Finished
 # -------------------------------------------------
 
 echo "=========================================="
-echo "Pipeline finished successfully."
+echo "Pipeline completed successfully."
 echo "=========================================="
