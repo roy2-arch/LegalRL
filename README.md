@@ -134,6 +134,8 @@ cache/entity_type_weights.pkl
 ---
 
 # Step 2 — Train with Reinforcement Learning
+The RL training starts from a supervised fine-tuned checkpoint.
+Users may initialize from any instruction-tuned LLaMA/Qwen model.
 
 Train the model using **GRPO optimization**.
 
