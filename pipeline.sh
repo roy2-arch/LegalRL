@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # ============================================
-# TANHA Pipeline Runner
 # Entity-guided RL for Legal Summarization
 # ============================================
 
