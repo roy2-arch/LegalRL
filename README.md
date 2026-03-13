@@ -160,7 +160,7 @@ HallucinationRate = weighted_fp / weighted_pred
 ---
 
 ## Final Reward
-Reward = alpha * WeightedRecall- beta * HallucinationRate+ gamma * EntityF1
+Reward = alpha * WeightedRecall- beta * HallucinationRate
 
 
 ---
