@@ -1,0 +1,11 @@
+torch
+transformers
+datasets
+trl
+sentence-transformers
+spacy
+scikit-learn
+wandb
+unsloth
+unsloth_zoo
+accelerate
