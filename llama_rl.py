@@ -104,13 +104,6 @@ val_df.rename(columns={"index": "id"}, inplace=True)
 
 PROMPT_TEMPLATE = """
 Summarize the TARGET JUDGMENT provided by the user.
-
-### STRUCTURE
-Case Details, Background, Legal Issues, Arguments, Precedents, Judicial Reasoning, Final Decision.
-
-### FACTUALITY RULE
-All legal entities must appear in the judgment text.
-Do not invent courts, statutes, judges or provisions.
 """
 
 train_df["input"] = (
